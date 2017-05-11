@@ -1,0 +1,8 @@
+<system xmlns="http://schema.paremus.com/sf/1.2" version="1.0.0" name="hello" boundary="fibre" repopath="">
+
+    <!-- A system part derived from example-app.bndrun -->
+    <system.part name="example-app"></system.part>
+
+    <!-- TODO: define additional parts by referencing the bndrun names here -->
+
+</system>

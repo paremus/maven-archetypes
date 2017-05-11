@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+  <packaging>pom</packaging>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>Paremus Releases</id>
+      <url>https://nexus.paremus.com/content/repositories/releases/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.parent.groupId}</groupId>
+      <artifactId>_index</artifactId>
+      <version>${project.parent.version}</version>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+
+      <!-- This plugin validates the bndrun files by resolving them against the index -->
+      <plugin>
+        <groupId>biz.aQute.bnd</groupId>
+        <artifactId>bnd-resolver-maven-plugin</artifactId>
+        <version>${bnd.maven.version}</version>
+        <configuration>
+          <failOnChanges>true</failOnChanges>
+          <bndruns>
+            <bndrun>src/main/resources/example-app.bndrun</bndrun>
+          </bndruns>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resolve</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- This plugin generates the system document(s) from a template, using the specified
+           index module and referencing bndrun files under src/main/resources -->
+      <plugin>
+        <groupId>com.paremus.fabric</groupId>
+        <artifactId>paremus-system-plugin</artifactId>
+        <version>1.0.0</version>
+        <configuration>
+          <indexes>
+              <index>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>_index</artifactId>
+                <version>${project.parent.version}</version>
+              </index>
+          </indexes>
+          <localURLs>${local.index.policy}</localURLs>
+          <schemaValidation>false</schemaValidation>
+        </configuration>
+        <executions>
+            <execution>
+                <id>prepare-system</id>
+                <goals>
+                    <goal>build-system</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>

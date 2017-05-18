@@ -11,11 +11,15 @@
     <pluginRepository>
       <id>Paremus Releases</id>
       <url>https://nexus.paremus.com/content/repositories/releases/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
       <snapshots>
         <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>Paremus Snapshots</id>
+      <url>https://nexus.paremus.com/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
@@ -58,7 +62,7 @@
       <plugin>
         <groupId>com.paremus.fabric</groupId>
         <artifactId>paremus-system-plugin</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
         <configuration>
           <indexes>
               <index>

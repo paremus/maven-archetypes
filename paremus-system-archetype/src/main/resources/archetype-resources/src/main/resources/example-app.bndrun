@@ -8,5 +8,3 @@
 
 # TODO: add bundle requirements to -runrequires, e.g.:
 # -runrequires: osgi.identity; filter:='(osgi.identity=org.example.hello)'
--runrequires:
--runbundles:
